@@ -65,4 +65,13 @@ public class SatResultService {
         }
         return false;
     }
+
+    public int getRank(String name){
+       List<SatResults> satResults = satResultRepo.findAllByScoreDesc();
+       return satResults.stream()
+               .filter(data -> Objects.equals(data.getName(), name))
+               .findFirst()
+               .map(satResults::indexOf)
+               .orElse(-1);
+    }
 }

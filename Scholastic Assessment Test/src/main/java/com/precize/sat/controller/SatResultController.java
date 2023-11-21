@@ -12,6 +12,7 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("v1/api/satResults")
+@CrossOrigin(origins = "http://localhost:3000")
 public class SatResultController {
 
     @Autowired
@@ -59,5 +60,13 @@ public class SatResultController {
         return new ResponseEntity<>("Error", HttpStatus.BAD_REQUEST);
     }
 
+    @GetMapping("/rank/{name}")
+    public ResponseEntity<Integer> getRankByName(@PathVariable String name){
+        int rank = satResultService.getRank(name);
+        if(rank > 0){
+            return new ResponseEntity<>(rank, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+    }
 
 }

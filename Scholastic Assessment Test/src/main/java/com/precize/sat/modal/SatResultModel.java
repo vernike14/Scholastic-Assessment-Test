@@ -26,4 +26,6 @@ public class SatResultModel {
 
     private double score;
 
+    private String result;
+
 }

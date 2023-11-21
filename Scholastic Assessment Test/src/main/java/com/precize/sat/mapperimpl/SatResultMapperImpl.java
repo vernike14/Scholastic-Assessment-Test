@@ -14,8 +14,16 @@ public class SatResultMapperImpl implements SatResultMapper {
     public List<SatResultModel> toSatResultModelList(List<SatResults> satResults) {
         List<SatResultModel> data = new ArrayList<>();
         for(SatResults results : satResults){
-            SatResultModel satResultModel = new SatResultModel(results.getId(), results.getName(), results.getAddress(),
-                    results.getName(), results.getCountry(), results.getPincode(), results.getScore());
+            SatResultModel satResultModel = new SatResultModel();
+            satResultModel.setId(results.getId());
+            satResultModel.setName(results.getName());
+            satResultModel.setAddress(results.getAddress());
+            satResultModel.setCountry(results.getCountry());
+            satResultModel.setCity(results.getCity());
+            satResultModel.setPincode(results.getPincode());
+            satResultModel.setScore(results.getScore());
+            String res = results.getScore() > 30.0 ? "PASS" : "FAIL";
+            satResultModel.setResult(res);
             data.add(satResultModel);
         }
         return data;
@@ -23,8 +31,16 @@ public class SatResultMapperImpl implements SatResultMapper {
 
     @Override
     public SatResultModel toSatResultModel(SatResults satResult) {
-        SatResultModel data = new SatResultModel(satResult.getId(), satResult.getName(), satResult.getAddress(),
-                satResult.getCity(), satResult.getCountry(), satResult.getPincode(), satResult.getScore());
+        SatResultModel data = new SatResultModel();
+        data.setId(satResult.getId());
+        data.setName(satResult.getName());
+        data.setAddress(satResult.getAddress());
+        data.setCountry(satResult.getCountry());
+        data.setCity(satResult.getCity());
+        data.setPincode(satResult.getPincode());
+        data.setScore(satResult.getScore());
+        String res = satResult.getScore() > 30.0 ? "PASS" : "FAIL";
+        data.setResult(res);
         return data;
     }
 
